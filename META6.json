@@ -11,7 +11,6 @@
   "depends":       [],
   "build-depends": [],
   "test-depends":  [],
-  "resources":     [],
   "tags":          ["math", "vector", "3d"],
   "source-url":    "git://github.com/sysread/p6-math-vector3d.git"
 }
