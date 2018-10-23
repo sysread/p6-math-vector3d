@@ -178,3 +178,13 @@ class Math::Vector3D {
     Math::Vector3D.new(x => $v.x, y => $v.y, z => $v.z);
   }
 }
+
+=head1 SEE ALSO
+
+=over
+
+=item L<Math::Vector>
+
+=back
+
+=cut

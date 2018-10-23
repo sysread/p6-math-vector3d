@@ -271,3 +271,23 @@ multi sub vec(
 
 Syntactic sugar to construct a new vector from another vector (clone). my $vec = vec $another_vector;
 
+SEE ALSO
+========
+
+over
+====
+
+
+
+  * [Math::Vector](Math::Vector)
+
+back
+====
+
+
+
+cut
+===
+
+
+
