@@ -14,8 +14,7 @@ class Math::Vector3D {
     self.length-squared.sqrt;
   }
 
-  #| Destructively adds another vector or a scalar numeric to this vector.
-  #| Returns this vector.
+  #| Destructively adds a vector to this vector.
   multi method add(Math::Vector3D:D $v --> Math::Vector3D) {
     $!x += $v.x;
     $!y += $v.y;
@@ -23,6 +22,7 @@ class Math::Vector3D {
     self;
   }
 
+  #| Destructively adds a scalar to this vector.
   multi method add(Numeric:D $n --> Math::Vector3D) {
     $!x += $n;
     $!y += $n;
@@ -30,8 +30,7 @@ class Math::Vector3D {
     self;
   }
 
-  #| Destructively subtracts another vector or a scalar numeric to this vector.
-  #| Returns this vector.
+  #| Destructively subtracts a vector from this vector.
   multi method sub(Math::Vector3D:D $v --> Math::Vector3D) {
     $!x -= $v.x;
     $!y -= $v.y;
@@ -39,6 +38,7 @@ class Math::Vector3D {
     self;
   }
 
+  #| Destructively subtracts a scalar from this vector.
   multi method sub(Numeric:D $n --> Math::Vector3D) {
     $!x -= $n;
     $!y -= $n;
@@ -46,8 +46,7 @@ class Math::Vector3D {
     self;
   }
 
-  #| Destructively multiplies this vector by another vector or a scalar numeric.
-  #| Returns this vector.
+  #| Destructively multiplies this vector by another vector.
   multi method mul(Math::Vector3D:D $v --> Math::Vector3D) {
     $!x *= $v.x;
     $!y *= $v.y;
@@ -55,6 +54,7 @@ class Math::Vector3D {
     self;
   }
 
+  #| Destructively multiplies tis vector by a scalar value.
   multi method mul(Numeric:D $n --> Math::Vector3D) {
     $!x *= $n;
     $!y *= $n;
@@ -62,8 +62,7 @@ class Math::Vector3D {
     self;
   }
 
-  #| Destructively divides this vector by another vector or a scalar numeric.
-  #| Returns this vector.
+  #| Destructively divides this vector by another vector.
   multi method div(Math::Vector3D:D $v --> Math::Vector3D) {
     $!x /= $v.x;
     $!y /= $v.y;
@@ -71,6 +70,7 @@ class Math::Vector3D {
     self;
   }
 
+  #| Destructively divides this vector by a scalar value.
   multi method div(Numeric:D $n --> Math::Vector3D) {
     $!x /= $n;
     $!y /= $n;
@@ -84,7 +84,7 @@ class Math::Vector3D {
   }
 
   #| Destructively updates this vector to be the cross product of itself and
-  #| another vector. Returns this vector.
+  #| another vector.
   method cross(Math::Vector3D:D $v --> Math::Vector3D) {
     my $x := $!y * $v.z - $!z * $v.y;
     my $y := $!z * $v.x - $!x * $v.z;
@@ -122,17 +122,17 @@ class Math::Vector3D {
     sqrt self.distance-to-squared($v);
   }
 
-  #| Destructively normalizes this vector. Returns this vector.
+  #| Destructively normalizes this vector.
   method normalize(--> Math::Vector3D) {
     self.div(self.length);
   }
 
-  #| Destructively sets the length of the vector. Returns this vector.
+  #| Destructively sets the length of the vector.
   method set-length(Numeric:D $n, --> Math::Vector3D) {
     self.normalize.mul($n);
   }
 
-  #| Lerps toward the target vector by the supplied value. Returns this vector.
+  #| Lerps toward the target vector by the supplied value.
   method lerp(Math::Vector3D:D $target, Numeric:D $n --> Math::Vector3D) {
     $!x += ($target.x - $!x) * $n;
     $!y += ($target.y - $!y) * $n;
@@ -145,28 +145,35 @@ class Math::Vector3D {
     List.new($!x, $!y, $!z);
   }
 
-  #| Overloads +, -, *, and /
+  #| C<+> is overloaded to L</add>
   multi sub infix:<+>(Math::Vector3D:D $v, $n --> Math::Vector3D) is export { vec($v).add($n) }
+
+  #| C<-> is overloaded to L</sub>
   multi sub infix:<->(Math::Vector3D:D $v, $n --> Math::Vector3D) is export { vec($v).sub($n) }
+
+  #| C<*> is overloaded to L</mul>
   multi sub infix:<*>(Math::Vector3D:D $v, $n --> Math::Vector3D) is export { vec($v).mul($n) }
+
+  #| C</> is overloaded to L</div>
   multi sub infix:</>(Math::Vector3D:D $v, $n --> Math::Vector3D) is export { vec($v).div($n) }
 
-  #| Overloads == to compare two vectors numerically
+  #| C<==> is overloaded to compare two vectors' C<x>, C<y>, and C<z> values
   multi infix:<==>(Math::Vector3D:D $v1, Math::Vector3D:D $v2 --> Bool) is export {
     return $v1.x == $v2.x
         && $v1.y == $v2.y
         && $v1.z == $v2.z;
   };
 
-  #| Syntactic sugar to construct a new vector from three numbers or another
-  #| vector (as a clone).
+  #| Syntactic sugar to construct a new vector from three numbers.
   #|
   #|   my $vec = vec 10, 20, 30;
-  #|   my $new_vec = vec $vec;
   multi sub vec(Numeric:D $x=0, Numeric:D $y=0, Numeric:D $z=0 --> Math::Vector3D) is export {
     Math::Vector3D.new(x => $x, y => $y, z => $z);
   }
 
+  #| Syntactic sugar to construct a new vector from another vector (clone).
+  #|
+  #|   my $vec = vec $another_vector;
   multi sub vec(Math::Vector3D:D $v --> Math::Vector3D) is export {
     Math::Vector3D.new(x => $v.x, y => $v.y, z => $v.z);
   }

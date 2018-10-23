@@ -27,7 +27,17 @@ multi method add(
 ) returns Math::Vector3D
 ```
 
-Destructively adds another vector or a scalar numeric to this vector. Returns this vector.
+Destructively adds a vector to this vector.
+
+### multi method add
+
+```perl6
+multi method add(
+    Numeric:D $n
+) returns Math::Vector3D
+```
+
+Destructively adds a scalar to this vector.
 
 ### multi method sub
 
@@ -37,7 +47,17 @@ multi method sub(
 ) returns Math::Vector3D
 ```
 
-Destructively subtracts another vector or a scalar numeric to this vector. Returns this vector.
+Destructively subtracts a vector from this vector.
+
+### multi method sub
+
+```perl6
+multi method sub(
+    Numeric:D $n
+) returns Math::Vector3D
+```
+
+Destructively subtracts a scalar from this vector.
 
 ### multi method mul
 
@@ -47,7 +67,17 @@ multi method mul(
 ) returns Math::Vector3D
 ```
 
-Destructively multiplies this vector by another vector or a scalar numeric. Returns this vector.
+Destructively multiplies this vector by another vector.
+
+### multi method mul
+
+```perl6
+multi method mul(
+    Numeric:D $n
+) returns Math::Vector3D
+```
+
+Destructively multiplies tis vector by a scalar value.
 
 ### multi method div
 
@@ -57,7 +87,17 @@ multi method div(
 ) returns Math::Vector3D
 ```
 
-Destructively divides this vector by another vector or a scalar numeric. Returns this vector.
+Destructively divides this vector by another vector.
+
+### multi method div
+
+```perl6
+multi method div(
+    Numeric:D $n
+) returns Math::Vector3D
+```
+
+Destructively divides this vector by a scalar value.
 
 ### method negate
 
@@ -75,7 +115,7 @@ method cross(
 ) returns Math::Vector3D
 ```
 
-Destructively updates this vector to be the cross product of itself and another vector. Returns this vector.
+Destructively updates this vector to be the cross product of itself and another vector.
 
 ### method dot
 
@@ -123,7 +163,7 @@ Computes the distance between this vector and the supplied vector.
 method normalize() returns Math::Vector3D
 ```
 
-Destructively normalizes this vector. Returns this vector.
+Destructively normalizes this vector.
 
 ### method set-length
 
@@ -133,7 +173,7 @@ method set-length(
 ) returns Math::Vector3D
 ```
 
-Destructively sets the length of the vector. Returns this vector.
+Destructively sets the length of the vector.
 
 ### method lerp
 
@@ -144,7 +184,7 @@ method lerp(
 ) returns Math::Vector3D
 ```
 
-Lerps toward the target vector by the supplied value. Returns this vector.
+Lerps toward the target vector by the supplied value.
 
 ### method List
 
@@ -163,7 +203,40 @@ multi sub infix:<+>(
 ) returns Math::Vector3D
 ```
 
-Overloads +, -, *, and /
+C<+> is overloaded to L</add>
+
+### multi sub infix:<->
+
+```perl6
+multi sub infix:<->(
+    Math::Vector3D:D $v,
+    $n
+) returns Math::Vector3D
+```
+
+C<-> is overloaded to L</sub>
+
+### multi sub infix:<*>
+
+```perl6
+multi sub infix:<*>(
+    Math::Vector3D:D $v,
+    $n
+) returns Math::Vector3D
+```
+
+C<*> is overloaded to L</mul>
+
+### multi sub infix:</>
+
+```perl6
+multi sub infix:</>(
+    Math::Vector3D:D $v,
+    $n
+) returns Math::Vector3D
+```
+
+C</> is overloaded to L</div>
 
 ### multi sub infix:<==>
 
@@ -174,7 +247,7 @@ multi sub infix:<==>(
 ) returns Bool
 ```
 
-Overloads == to compare two vectors numerically
+C<==> is overloaded to compare two vectors' C<x>, C<y>, and C<z> values
 
 ### multi sub vec
 
@@ -186,5 +259,15 @@ multi sub vec(
 ) returns Math::Vector3D
 ```
 
-Syntactic sugar to construct a new vector from three numbers or another vector (as a clone). my $vec = vec 10, 20, 30; my $new_vec = vec $vec;
+Syntactic sugar to construct a new vector from three numbers. my $vec = vec 10, 20, 30;
+
+### multi sub vec
+
+```perl6
+multi sub vec(
+    Math::Vector3D:D $v
+) returns Math::Vector3D
+```
+
+Syntactic sugar to construct a new vector from another vector (clone). my $vec = vec $another_vector;
 
