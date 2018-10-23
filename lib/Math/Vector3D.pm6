@@ -1,12 +1,44 @@
-#| A 3-dimensional vector class with numeric x, y, and z attributes.
+=begin pod
+
+=head1 NAME
+
+Math::Vector3D
+
+=head1 VERSION
+
+0.0.1
+
+=head1 SYNOPSIS
+
+  use Math::Vector3D;
+
+  my $vec = vec(10, 20, 30);
+
+  $vec -= $other-vector;
+  $vec *= 42;
+  $vec /= 10;
+
+  $vec.normalize;
+
+  my $len = $vec.length;
+
+=head1 SEE ALSO
+
+=item L<Math::Vector>
+
+Has support for any number of dimensions.
+
+=end pod
+
+#| Vector object
 class Math::Vector3D:ver<0.0.1> {
-  #| x - defaults to 0
+  #| Default: 0
   has Numeric $.x = 0;
 
-  #| y - defaults to 0
+  #| Default: 0
   has Numeric $.y = 0;
 
-  #| z - defaults to 0
+  #| Default: 0
   has Numeric $.z = 0;
 
   #| Returns the squared length of the vector
@@ -59,7 +91,7 @@ class Math::Vector3D:ver<0.0.1> {
     self;
   }
 
-  #| Destructively multiplies tis vector by a scalar value.
+  #| Destructively multiplies this vector by a scalar value.
   multi method mul(Numeric:D $n --> Math::Vector3D) {
     $!x *= $n;
     $!y *= $n;
@@ -150,19 +182,19 @@ class Math::Vector3D:ver<0.0.1> {
     List.new($!x, $!y, $!z);
   }
 
-  #| C<+> is overloaded to L</add>
+  #| + is overloaded to add
   multi sub infix:<+>(Math::Vector3D:D $v, $n --> Math::Vector3D) is export { vec($v).add($n) }
 
-  #| C<-> is overloaded to L</sub>
+  #| - is overloaded to sub
   multi sub infix:<->(Math::Vector3D:D $v, $n --> Math::Vector3D) is export { vec($v).sub($n) }
 
-  #| C<*> is overloaded to L</mul>
+  #| * is overloaded to mul
   multi sub infix:<*>(Math::Vector3D:D $v, $n --> Math::Vector3D) is export { vec($v).mul($n) }
 
-  #| C</> is overloaded to L</div>
+  #| / is overloaded to div
   multi sub infix:</>(Math::Vector3D:D $v, $n --> Math::Vector3D) is export { vec($v).div($n) }
 
-  #| C<==> is overloaded to compare two vectors' C<x>, C<y>, and C<z> values
+  #| == is overloaded to compare two vectors' x, y, and z values
   multi infix:<==>(Math::Vector3D:D $v1, Math::Vector3D:D $v2 --> Bool) is export {
     return $v1.x == $v2.x
         && $v1.y == $v2.y
@@ -183,6 +215,3 @@ class Math::Vector3D:ver<0.0.1> {
     Math::Vector3D.new(x => $v.x, y => $v.y, z => $v.z);
   }
 }
-
-#= SEE ALSO:
-#=   L<Math::Vector> - supports any number of dimensions

@@ -1,19 +1,51 @@
+NAME
+====
+
+Math::Vector3D
+
+VERSION
+=======
+
+0.0.1
+
+SYNOPSIS
+========
+
+    use Math::Vector3D;
+
+    my $vec = vec(10, 20, 30);
+
+    $vec -= $other-vector;
+    $vec *= 42;
+    $vec /= 10;
+
+    $vec.normalize;
+
+    my $len = $vec.length;
+
+SEE ALSO
+========
+
+  * [Math::Vector](Math::Vector)
+
+Has support for any number of dimensions.
+
 class Math::Vector3D
 --------------------
 
-A 3-dimensional vector class with numeric x, y, and z attributes.
+Vector object
 
 ### has Numeric $.x
 
-x - defaults to 0
+Default: 0
 
 ### has Numeric $.y
 
-y - defaults to 0
+Default: 0
 
 ### has Numeric $.z
 
-z - defaults to 0
+Default: 0
 
 ### method length-squared
 
@@ -89,7 +121,7 @@ multi method mul(
 ) returns Math::Vector3D
 ```
 
-Destructively multiplies tis vector by a scalar value.
+Destructively multiplies this vector by a scalar value.
 
 ### multi method div
 
@@ -215,7 +247,7 @@ multi sub infix:<+>(
 ) returns Math::Vector3D
 ```
 
-C<+> is overloaded to L</add>
++ is overloaded to add
 
 ### multi sub infix:<->
 
@@ -226,7 +258,7 @@ multi sub infix:<->(
 ) returns Math::Vector3D
 ```
 
-C<-> is overloaded to L</sub>
+- is overloaded to sub
 
 ### multi sub infix:<*>
 
@@ -237,7 +269,7 @@ multi sub infix:<*>(
 ) returns Math::Vector3D
 ```
 
-C<*> is overloaded to L</mul>
+* is overloaded to mul
 
 ### multi sub infix:</>
 
@@ -248,7 +280,7 @@ multi sub infix:</>(
 ) returns Math::Vector3D
 ```
 
-C</> is overloaded to L</div>
+/ is overloaded to div
 
 ### multi sub infix:<==>
 
@@ -259,7 +291,7 @@ multi sub infix:<==>(
 ) returns Bool
 ```
 
-C<==> is overloaded to compare two vectors' C<x>, C<y>, and C<z> values
+== is overloaded to compare two vectors' x, y, and z values
 
 ### multi sub vec
 
@@ -282,5 +314,4 @@ multi sub vec(
 ```
 
 Syntactic sugar to construct a new vector from another vector (clone). my $vec = vec $another_vector;
-SEE ALSO: L<Math::Vector> - supports any number of dimensions
 

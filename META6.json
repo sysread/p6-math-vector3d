@@ -2,7 +2,6 @@
   "perl":          "6.c",
   "name":          "Math::Vector3D",
   "auth":          "github:sysread",
-  "api":           "1",
   "version":       "0.0.1",
   "description":   "3-dimensional vector math",
   "authors":       ["Jeff Ober"],
