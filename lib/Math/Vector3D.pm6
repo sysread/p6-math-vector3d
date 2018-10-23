@@ -1,5 +1,5 @@
 #| A 3-dimensional vector class with numeric x, y, and z attributes.
-class Math::Vector3D {
+class Math::Vector3D:ver<0.0.1> {
   #| x - defaults to 0
   has Numeric $.x = 0;
 
