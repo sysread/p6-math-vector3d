@@ -14,7 +14,11 @@ dist: clean
 			 .
 
 release: dist
-	cpan-upload -v -d Perl6 $(FILE)
+	@read -p "Upload $(FILE) to CPAN? [y/n] " choice
+	@case "$$choice" in \
+		Y|y ) echo cpan-upload -d Perl6 $(FILE);; \
+		  * ) echo Cancelled;;  \
+	esac
 
 test:
 	@zef test .
