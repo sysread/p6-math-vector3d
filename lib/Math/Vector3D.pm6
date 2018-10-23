@@ -1,7 +1,12 @@
 #| A 3-dimensional vector class with numeric x, y, and z attributes.
 class Math::Vector3D {
+  #| x - defaults to 0
   has Numeric $.x = 0;
+
+  #| y - defaults to 0
   has Numeric $.y = 0;
+
+  #| z - defaults to 0
   has Numeric $.z = 0;
 
   #| Returns the squared length of the vector
@@ -179,12 +184,5 @@ class Math::Vector3D {
   }
 }
 
-=head1 SEE ALSO
-
-=over
-
-=item L<Math::Vector>
-
-=back
-
-=cut
+#= SEE ALSO:
+#=   L<Math::Vector> - supports any number of dimensions

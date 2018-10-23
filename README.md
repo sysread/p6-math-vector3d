@@ -3,6 +3,18 @@ class Math::Vector3D
 
 A 3-dimensional vector class with numeric x, y, and z attributes.
 
+### has Numeric $.x
+
+x - defaults to 0
+
+### has Numeric $.y
+
+y - defaults to 0
+
+### has Numeric $.z
+
+z - defaults to 0
+
 ### method length-squared
 
 ```perl6
@@ -270,24 +282,5 @@ multi sub vec(
 ```
 
 Syntactic sugar to construct a new vector from another vector (clone). my $vec = vec $another_vector;
-
-SEE ALSO
-========
-
-over
-====
-
-
-
-  * [Math::Vector](Math::Vector)
-
-back
-====
-
-
-
-cut
-===
-
-
+SEE ALSO: L<Math::Vector> - supports any number of dimensions
 
