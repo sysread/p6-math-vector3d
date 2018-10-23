@@ -202,15 +202,11 @@ class Math::Vector3D:ver<0.0.1> {
   };
 
   #| Syntactic sugar to construct a new vector from three numbers.
-  #|
-  #|   my $vec = vec 10, 20, 30;
   multi sub vec(Numeric:D $x=0, Numeric:D $y=0, Numeric:D $z=0 --> Math::Vector3D) is export {
     Math::Vector3D.new(x => $x, y => $y, z => $z);
   }
 
   #| Syntactic sugar to construct a new vector from another vector (clone).
-  #|
-  #|   my $vec = vec $another_vector;
   multi sub vec(Math::Vector3D:D $v --> Math::Vector3D) is export {
     Math::Vector3D.new(x => $v.x, y => $v.y, z => $v.z);
   }

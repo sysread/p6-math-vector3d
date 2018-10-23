@@ -303,7 +303,7 @@ multi sub vec(
 ) returns Math::Vector3D
 ```
 
-Syntactic sugar to construct a new vector from three numbers. my $vec = vec 10, 20, 30;
+Syntactic sugar to construct a new vector from three numbers.
 
 ### multi sub vec
 
@@ -313,5 +313,5 @@ multi sub vec(
 ) returns Math::Vector3D
 ```
 
-Syntactic sugar to construct a new vector from another vector (clone). my $vec = vec $another_vector;
+Syntactic sugar to construct a new vector from another vector (clone).
 
