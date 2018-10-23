@@ -5,7 +5,13 @@ FILE     = $(NAME)-$(VERSION).tar.gz
 dist: clean
 	@echo Building $(FILE)
 	@touch $(FILE)
-	@tar --warning=no-file-changed -czf $(FILE) --transform s/^\./$(NAME)-$(VERSION)/ --exclude-vcs --exclude=.[^/]* --exclude=*.tar.gz .
+	@tar --warning=no-file-changed              \
+			 -czf $(FILE) 													\
+			 --transform s/^\./$(NAME)-$(VERSION)/  \
+			 --exclude-vcs 										   	  \
+			 --exclude=.[^/]* 										 	\
+			 --exclude=*.tar.gz                     \
+			 .
 
 release: dist
 	cpan-upload -v -d Perl6 $(FILE)
