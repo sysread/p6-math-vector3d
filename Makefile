@@ -1,8 +1,9 @@
+PKG     := "lib/$(shell grep '"name"'    ./META6.json | col | cut -f2 | sed 's/[", ]//g' | sed 's/::/\//g').pm6"
 VERSION := $(shell grep '"version"' ./META6.json | col | cut -f2 | sed 's/[", ]//g' | sed 's/::/-/g')
 NAME    := $(shell grep '"name"'    ./META6.json | col | cut -f2 | sed 's/[", ]//g' | sed 's/::/-/g')
 FILE     = $(NAME)-$(VERSION).tar.gz
 
-dist: clean
+dist: doc clean
 	@echo Building $(FILE)
 	@touch $(FILE)
 	@tar --warning=no-file-changed              \
@@ -14,14 +15,17 @@ dist: clean
 			 .
 
 release: dist
-	@read -p "Upload $(FILE) to CPAN? [y/n] " choice
-	@case "$$choice" in \
-		Y|y ) echo cpan-upload -d Perl6 $(FILE);; \
-		  * ) echo Cancelled;;  \
+	@read -p "Upload $(FILE) to CPAN? [y/n] " yn; 	\
+	case $$yn in 																		\
+		y) cpan-upload -d Perl6 $(FILE);; 	          \
+		*) echo Cancelled;;  										      \
 	esac
 
+doc:
+	perl6 --doc=Markdown $(PKG) > README.md
+
 test:
-	@zef test .
+	@zef test -v .
 
 clean:
 	rm -f ./$(FILE)
